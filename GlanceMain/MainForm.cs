@@ -1,4 +1,3 @@
-using GlanceScreenshot;
 using Sunny.UI;
 
 namespace GlanceMain;

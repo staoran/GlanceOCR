@@ -44,7 +44,6 @@ partial class MainForm
             // 
             this.btnScreenshots.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.btnScreenshots.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.btnScreenshots.FillDisableColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.btnScreenshots.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
             this.btnScreenshots.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnScreenshots.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
@@ -54,15 +53,15 @@ partial class MainForm
             this.btnScreenshots.Name = "btnScreenshots";
             this.btnScreenshots.RadiusSides = ((Sunny.UI.UICornerRadiusSides)((Sunny.UI.UICornerRadiusSides.LeftTop | Sunny.UI.UICornerRadiusSides.LeftBottom)));
             this.btnScreenshots.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.btnScreenshots.RectDisableColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.btnScreenshots.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
             this.btnScreenshots.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnScreenshots.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnScreenshots.Size = new System.Drawing.Size(40, 32);
             this.btnScreenshots.Style = Sunny.UI.UIStyle.Custom;
             this.btnScreenshots.StyleCustomMode = true;
-            this.btnScreenshots.Symbol = 57350;
+            this.btnScreenshots.Symbol = 363571;
             this.btnScreenshots.TabIndex = 1;
+            this.btnScreenshots.TipsText = "截屏并识别";
             this.btnScreenshots.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnTranslate
@@ -84,8 +83,9 @@ partial class MainForm
             this.btnTranslate.Size = new System.Drawing.Size(40, 32);
             this.btnTranslate.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnTranslate.StyleCustomMode = true;
-            this.btnTranslate.Symbol = 61612;
+            this.btnTranslate.Symbol = 361867;
             this.btnTranslate.TabIndex = 2;
+            this.btnTranslate.TipsText = "翻译";
             this.btnTranslate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // splitContainer
