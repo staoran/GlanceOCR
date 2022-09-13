@@ -29,11 +29,13 @@ partial class MainForm
     /// </summary>
     private void InitializeComponent()
     {
+            this.components = new System.ComponentModel.Container();
             this.btnScreenshots = new Sunny.UI.UISymbolButton();
             this.btnTranslate = new Sunny.UI.UISymbolButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.txtOCR = new Sunny.UI.UIRichTextBox();
             this.txtTranslate = new Sunny.UI.UIRichTextBox();
+            this.toolTip = new Sunny.UI.UIToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -152,6 +154,12 @@ partial class MainForm
             this.txtTranslate.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.txtTranslate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // toolTip
+            // 
+            this.toolTip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
+            this.toolTip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.toolTip.OwnerDraw = true;
+            // 
             // MainForm
             // 
             this.AllowAddControlOnTitle = true;
@@ -183,4 +191,5 @@ partial class MainForm
     private SplitContainer splitContainer;
     private Sunny.UI.UIRichTextBox txtOCR;
     private Sunny.UI.UIRichTextBox txtTranslate;
+    private Sunny.UI.UIToolTip toolTip;
 }
