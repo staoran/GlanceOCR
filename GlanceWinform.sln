@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlanceOCR", "GlanceOCR\GlanceOCR.csproj", "{8825A40E-84A0-45B1-B0AE-EC237E213E61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlanceMain", "GlanceMain\GlanceMain.csproj", "{8825A40E-84A0-45B1-B0AE-EC237E213E61}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlanceScreenshot", "GlanceScreenshot\GlanceScreenshot.csproj", "{3DD2D2FE-9C52-4B95-8BF0-812BB48C38AF}"
 EndProject
