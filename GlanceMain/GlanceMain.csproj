@@ -14,6 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\GlanceOCR\GlanceOCR.csproj" />
       <ProjectReference Include="..\GlanceScreenshot\GlanceScreenshot.csproj" />
     </ItemGroup>
 

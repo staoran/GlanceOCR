@@ -65,6 +65,7 @@ partial class MainForm
             this.btnScreenshots.Symbol = 57350;
             this.btnScreenshots.TabIndex = 1;
             this.btnScreenshots.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnScreenshots.Click += new System.EventHandler(this.btnScreenshots_Click);
             // 
             // btnTranslate
             // 
