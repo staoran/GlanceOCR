@@ -36,6 +36,7 @@ partial class MainForm
             this.txtOCR = new Sunny.UI.UIRichTextBox();
             this.txtTranslate = new Sunny.UI.UIRichTextBox();
             this.toolTip = new Sunny.UI.UIToolTip(this.components);
+            this.styleManager = new Sunny.UI.UIStyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -161,6 +162,10 @@ partial class MainForm
             this.toolTip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
             this.toolTip.OwnerDraw = true;
             // 
+            // styleManager
+            // 
+            this.styleManager.Style = Sunny.UI.UIStyle.LayuiGreen;
+            // 
             // MainForm
             // 
             this.AllowAddControlOnTitle = true;
@@ -173,7 +178,6 @@ partial class MainForm
             this.Name = "MainForm";
             this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.StyleCustomMode = true;
             this.Text = "一目十行";
             this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
@@ -193,4 +197,5 @@ partial class MainForm
     private Sunny.UI.UIRichTextBox txtOCR;
     private Sunny.UI.UIRichTextBox txtTranslate;
     private Sunny.UI.UIToolTip toolTip;
+    private Sunny.UI.UIStyleManager styleManager;
 }
