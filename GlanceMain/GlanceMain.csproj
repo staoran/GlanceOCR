@@ -18,6 +18,7 @@
     <ItemGroup>
       <ProjectReference Include="..\GlanceOCR\GlanceOCR.csproj" />
       <ProjectReference Include="..\GlanceScreenshot\GlanceScreenshot.csproj" />
+      <ProjectReference Include="..\GlanceTranslate\GlanceTranslate.csproj" />
     </ItemGroup>
 
     <ItemGroup>

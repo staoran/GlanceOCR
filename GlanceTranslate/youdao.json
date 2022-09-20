@@ -1,0 +1,21 @@
+﻿{
+  "YouDao": {
+    "Name": "youdao",
+    "BaseURL": "https://openapi.youdao.com/",
+    "SourceLanguages": {
+      "中": "zh-CHS",
+      "英": "en",
+      "日": "ja",
+      "韩": "ko",
+      "法": "fr",
+      "德": "de",
+      "俄": "ru",
+      "西": "es",
+      "葡": "pt",
+      "意": "it",
+      "越": "vi"
+    },
+    "AppKey": "",
+    "AppSecret": ""
+  }
+}
