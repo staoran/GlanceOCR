@@ -90,6 +90,7 @@ partial class MainForm
             this.btnTranslate.Symbol = 362845;
             this.btnTranslate.TabIndex = 2;
             this.btnTranslate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnTranslate.Click += new System.EventHandler(this.btnTranslate_Click);
             // 
             // splitContainer
             // 

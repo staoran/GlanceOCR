@@ -1,5 +1,8 @@
+using Furion;
 using GlanceOCR;
 using GlanceScreenshot;
+using GlanceTranslate;
+using GlanceTranslate.YouDao;
 using Sunny.UI;
 
 namespace GlanceMain;
@@ -23,6 +26,11 @@ public partial class MainForm : UIForm
         base.OnLoad(e);
     }
 
+    /// <summary>
+    /// 截图识别
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void btnScreenshots_Click(object sender, EventArgs e)
     {
         Hide();
@@ -40,5 +48,18 @@ public partial class MainForm : UIForm
                 HideWaitForm();
             }
         }
+    }
+
+    /// <summary>
+    /// 文本翻译
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private async void btnTranslate_Click(object? sender, EventArgs e)
+    {
+        splitContainer.Panel2Collapsed = false;
+        ITranslator trans = App.GetService<YouDaoLite>();
+        var result = await trans.TranslateAsync(txtOCR.Text, "Auto");
+        txtTranslate.Text = result.Translation;
     }
 }
