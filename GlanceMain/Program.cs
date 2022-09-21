@@ -1,6 +1,7 @@
 using Furion;
 using GlanceTranslate.YouDao;
 using Microsoft.Extensions.DependencyInjection;
+using Sunny.UI;
 
 namespace GlanceMain;
 
@@ -12,11 +13,53 @@ static class Program
     [STAThread]
     static void Main()
     {
+        #region 全局异常事件
+
+        // 向事件中添加用于处理UI线程异常的事件处理程序
+        Application.ThreadException += Application_ThreadException;
+
+        // 设置未处理的异常模式以强制所有Windows窗体错误通过我们的处理程序
+        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
+        // 向事件中添加用于处理非UI线程异常的事件处理程序
+        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+        #endregion
+
         Serve.Run(GenericRunOptions.DefaultSilence);
         Application.SetHighDpiMode(HighDpiMode.PerMonitor);
         ApplicationConfiguration.Initialize();
         Application.Run(new MainForm());
     }
+
+    #region 异常处理程序
+
+    /// <summary>
+    /// UI线程异常的事件处理程序
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+    {
+        UIMessageTip.ShowError(e.Exception.Message);
+    }
+
+    /// <summary>
+    /// 非UI线程异常的事件处理程序
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+        if (e.ExceptionObject is Exception ex)
+        {
+            UIMessageTip.ShowError(ex.Message);
+        }
+    }
+
+    #endregion
 }
 
 public class Startup : AppStartup
