@@ -1,10 +1,3 @@
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using Furion;
-using GlanceTranslate.YouDao;
-using Microsoft.Extensions.DependencyInjection;
-using Sunny.UI;
-
 namespace GlanceMain;
 
 static class Program

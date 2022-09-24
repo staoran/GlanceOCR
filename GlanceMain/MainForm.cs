@@ -1,10 +1,3 @@
-using Furion;
-using GlanceOCR;
-using GlanceScreenshot;
-using GlanceTranslate;
-using GlanceTranslate.YouDao;
-using Sunny.UI;
-
 namespace GlanceMain;
 
 public partial class MainForm : UIForm
