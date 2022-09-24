@@ -38,7 +38,8 @@ static class Program
         Application.SetHighDpiMode(HighDpiMode.PerMonitor);
         // 应用程序初始化
         ApplicationConfiguration.Initialize();
-        Application.Run(new MainForm());
+
+        Application.Run(MainForm.Current);
     }
 
     #region 异常处理程序

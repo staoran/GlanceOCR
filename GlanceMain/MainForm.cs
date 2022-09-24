@@ -9,6 +9,14 @@ namespace GlanceMain;
 
 public partial class MainForm : UIForm
 {
+    public static MainForm Current => LazyInitializer.Instance;
+
+    private static class LazyInitializer
+    {
+        static LazyInitializer() { }
+        public static readonly MainForm Instance = new();
+    }
+
     public MainForm()
     {
         InitializeComponent();
