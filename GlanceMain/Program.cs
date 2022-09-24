@@ -51,7 +51,12 @@ static class Program
     /// <exception cref="NotImplementedException"></exception>
     private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
     {
-        UIMessageTip.ShowError(e.Exception.Message);
+        if(e.Exception is HotkeyAlreadyRegisteredException ex)
+            UIMessageTip.ShowError(_main, $"快捷键 {ex.Name} 已经被其他程序注册");
+        else
+        {
+            UIMessageTip.ShowError(e.Exception.Message);
+        }
     }
 
     /// <summary>

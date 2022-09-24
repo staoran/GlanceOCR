@@ -24,6 +24,9 @@ public partial class MainForm : UIForm
         toolTip.SetToolTip(btnScreenshots, "截图并识别");
         toolTip.SetToolTip(btnTranslate, "翻译");
         base.OnLoad(e);
+
+        HotkeyManager.Current.AddOrReplace("F4", Keys.F4, btnScreenshots_Click);
+        HotkeyManager.Current.AddOrReplace("F6", Keys.F6, btnTranslate_Click);
     }
 
     /// <summary>

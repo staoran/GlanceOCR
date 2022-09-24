@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlanceOCR", "GlanceOCR\Glan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlanceTranslate", "GlanceTranslate\GlanceTranslate.csproj", "{4B264E12-B687-4AC6-A2ED-E5AD05CDD11D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlanceHotkey", "GlanceHotkey\GlanceHotkey.csproj", "{AE4FA686-B566-4A3F-9A92-C7925827383F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|x64 = Release|x64
@@ -30,5 +32,9 @@ Global
 		{4B264E12-B687-4AC6-A2ED-E5AD05CDD11D}.Release|x64.Build.0 = Release|Any CPU
 		{4B264E12-B687-4AC6-A2ED-E5AD05CDD11D}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{4B264E12-B687-4AC6-A2ED-E5AD05CDD11D}.Debug|x64.Build.0 = Debug|Any CPU
+		{AE4FA686-B566-4A3F-9A92-C7925827383F}.Release|x64.ActiveCfg = Release|Any CPU
+		{AE4FA686-B566-4A3F-9A92-C7925827383F}.Release|x64.Build.0 = Release|Any CPU
+		{AE4FA686-B566-4A3F-9A92-C7925827383F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AE4FA686-B566-4A3F-9A92-C7925827383F}.Debug|x64.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
