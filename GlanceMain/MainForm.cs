@@ -65,11 +65,10 @@ public partial class MainForm : UIForm
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private async void btnScreenshots_Click(object sender, EventArgs e)
+    private async void btnScreenshots_Click(object? sender, EventArgs e)
     {
         Hide();
         using Screenshots screenshots = new Screenshots();
-        Show();
         if (screenshots.ShowDialog() == DialogResult.OK)
         {
             var image = screenshots.SelectImage;
@@ -82,6 +81,7 @@ public partial class MainForm : UIForm
                 HideWaitForm();
             }
         }
+        Show();
     }
 
     /// <summary>
