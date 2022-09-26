@@ -18,6 +18,9 @@ partial class MainForm
             components.Dispose();
         }
 
+        // 释放托盘图标
+        NotifyIconManager.Current.Dispose();
+
         base.Dispose(disposing);
     }
 

@@ -2,6 +2,8 @@ namespace GlanceMain;
 
 public partial class MainForm : UIForm
 {
+    #region 单例化主窗体
+
     public static MainForm Current => LazyInitializer.Instance;
 
     private static class LazyInitializer
@@ -10,8 +12,35 @@ public partial class MainForm : UIForm
         public static readonly MainForm Instance = new();
     }
 
-    public MainForm()
+    #endregion
+
+    private MainForm()
     {
+        // 初始化托盘图标
+        NotifyIconManager.Current.Run("一目十行\n双击截图识别\n单击打开主界面", Resources.AppIcon, n =>
+        {
+            n.ContextMenuStrip = new UIContextMenuStrip()
+            {
+                Items =
+                {
+                    { "截图", null, btnScreenshots_Click },
+                    "-",
+                    { "设置", null, (_, _) => { } },
+                    "-",
+                    { "打开", null, (_, _) => { Show(); } },
+                    { "退出", null, (_, _) => { Application.ExitThread(); } },
+                }
+            };
+            n.MouseClick += (sender, args) =>
+            {
+                if (args.Button == MouseButtons.Left)
+                {
+                    Show();
+                }
+            };
+            n.DoubleClick += btnScreenshots_Click;
+        });
+
         InitializeComponent();
         Icon = Resources.AppIcon;
     }
