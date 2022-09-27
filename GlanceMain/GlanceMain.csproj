@@ -10,6 +10,7 @@
         <Configurations>Release;Debug</Configurations>
         <Platforms>x64</Platforms>
         <ApplicationIcon>logo.ico</ApplicationIcon>
+        <SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
     </PropertyGroup>
 
     <ItemGroup>

@@ -4,10 +4,12 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Configurations>Release;Debug</Configurations>
+        <Platforms>x64</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Furion.Pure" Version="4.4.5" />
+      <PackageReference Include="Furion.Pure" Version="4.5.0" />
       <PackageReference Include="GTranslate" Version="2.1.1" />
     </ItemGroup>
 
