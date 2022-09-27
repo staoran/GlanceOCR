@@ -9,7 +9,32 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="PaddleOCRSharp" Version="2.0.3" />
+      <PackageReference Include="Emgu.CV" Version="4.5.5.4823" />
+      <PackageReference Include="Emgu.CV.Bitmap" Version="4.5.5.4823" />
+      <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.12.1" />
+      <PackageReference Include="PaddleOCRSharp" Version="2.0.4" />
+      <PackageReference Include="ParagonClipper" Version="6.4.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="cvextern.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="models\angle_net.onnx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="models\crnn_lite_lstm.onnx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="models\dbnet.onnx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="models\keys.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="opencv_videoio_ffmpeg440_64.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
