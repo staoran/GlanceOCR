@@ -11,6 +11,7 @@
     <ItemGroup>
       <PackageReference Include="Emgu.CV" Version="4.5.5.4823" />
       <PackageReference Include="Emgu.CV.Bitmap" Version="4.5.5.4823" />
+      <PackageReference Include="Furion.Pure" Version="4.5.0" />
       <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.12.1" />
       <PackageReference Include="PaddleOCRSharp" Version="2.0.4" />
       <PackageReference Include="ParagonClipper" Version="6.4.2" />
