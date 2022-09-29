@@ -118,7 +118,7 @@ public class NotifyIconManager : IDisposable
             // CloseHandle(handle);
             // handle = IntPtr.Zero;
 
-            // 笔记处理已完成
+            // 标记处理已完成
             _disposed = true;
         }
     }
