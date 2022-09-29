@@ -32,7 +32,7 @@ public static class GlobalException
             UIMessageTip.ShowError(MainForm.Current, $"快捷键 {ex.Name} 已经被其他程序注册");
         else
         {
-            UIMessageTip.ShowError(e.Exception.Message);
+            UIMessageTip.ShowError(MainForm.Current, e.Exception.Message);
         }
     }
 
@@ -46,7 +46,7 @@ public static class GlobalException
     {
         if (e.ExceptionObject is Exception ex)
         {
-            UIMessageTip.ShowError(ex.Message);
+            UIMessageTip.ShowError(MainForm.Current, ex.Message);
         }
     }
 }
