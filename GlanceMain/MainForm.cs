@@ -94,6 +94,9 @@ public partial class MainForm : UIForm
         // Keys.F4.ToString()
         HotkeyManager.Current.AddOrReplace(_appOptions.OCRShortcutKey, Enum.Parse<Keys>(_appOptions.OCRShortcutKey), btnScreenshots_Click);
         HotkeyManager.Current.AddOrReplace(_appOptions.TranslationShortcutKey, Enum.Parse<Keys>(_appOptions.TranslationShortcutKey), btnTranslate_Click);
+
+        // 程序自启
+        AutoStart.SetMeAutoStart(_appOptions.AutoStart);
     }
 
     /// <summary>
@@ -153,4 +156,21 @@ public partial class MainForm : UIForm
         var result = await trans.TranslateAsync(txtOCR.Text, "Auto");
         txtTranslate.Text = result.Translation;
     }
+
+    #region 内存回收
+
+    [DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
+    private static extern int SetProcessWorkingSetSize(IntPtr process, int minimumWorkingSetSize, int maximumWorkingSetSize);
+
+    public void ClearMemory()
+    {
+        GC.Collect();
+
+        if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+        {
+            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
+        }
+    }
+
+    #endregion
 }
