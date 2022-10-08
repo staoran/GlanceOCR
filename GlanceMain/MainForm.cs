@@ -125,10 +125,17 @@ public partial class MainForm : UIForm
             if (image != null)
             {
                 ShowWaitForm("文字识别中...");
-                using IOCR ocr = new PaddleOCRService();
-                await ocr.Check();
-                txtOCR.Text = await ocr.DetectText(image);
-                HideWaitForm();
+                try
+                {
+                    using IOCR ocr = new YouDaoOCRLite();
+                    await ocr.Check();
+                    txtOCR.Text = await ocr.DetectText(image);
+                }
+                finally
+                {
+                    HideWaitForm();
+                    Show();
+                }
             }
         }
         Show();
