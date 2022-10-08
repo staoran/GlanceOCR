@@ -14,6 +14,8 @@ public partial class MainForm : UIForm
 
     #endregion
 
+    private readonly AppOptions _appOptions;
+
     private MainForm()
     {
         // 初始化托盘图标
@@ -43,6 +45,39 @@ public partial class MainForm : UIForm
 
         InitializeComponent();
         Icon = Resources.AppIcon;
+        
+        txtOCR.TextChanged += TxtOCROnTextChanged;
+        Closing += OnClosing;
+        Shown += OnShown;
+        _appOptions = App.GetOptionsMonitor<AppOptions>();
+    }
+
+    /// <summary>
+    /// 窗体首次显示时
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void OnShown(object? sender, EventArgs e)
+    {
+        if (_appOptions.Hide)
+        {
+            Hide();
+        }
+    }
+
+    /// <summary>
+    /// 窗体关闭前
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    private void OnClosing(object? sender, CancelEventArgs e)
+    {
+        if (_appOptions.CloseToPallet)
+        {
+            e.Cancel = true;
+            Hide();
+        }
     }
 
     /// <summary>
@@ -56,8 +91,23 @@ public partial class MainForm : UIForm
         toolTip.SetToolTip(btnTranslate, "翻译");
         base.OnLoad(e);
 
-        HotkeyManager.Current.AddOrReplace("F4", Keys.F4, btnScreenshots_Click);
-        HotkeyManager.Current.AddOrReplace("F6", Keys.F6, btnTranslate_Click);
+        // Keys.F4.ToString()
+        HotkeyManager.Current.AddOrReplace(_appOptions.OCRShortcutKey, Enum.Parse<Keys>(_appOptions.OCRShortcutKey), btnScreenshots_Click);
+        HotkeyManager.Current.AddOrReplace(_appOptions.TranslationShortcutKey, Enum.Parse<Keys>(_appOptions.TranslationShortcutKey), btnTranslate_Click);
+    }
+
+    /// <summary>
+    /// OCR 文本改变事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void TxtOCROnTextChanged(object? sender, EventArgs e)
+    {
+        // 快捷翻译
+        if (_appOptions.QuickTranslation)
+        {
+            btnTranslate_Click(sender, e);
+        }
     }
 
     /// <summary>
