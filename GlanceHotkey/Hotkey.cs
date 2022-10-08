@@ -37,7 +37,7 @@ namespace GlanceHotkey
                 var ex = Marshal.GetExceptionForHR(hr);
                 if ((uint) hr == 0x80070581)
                     throw new HotkeyAlreadyRegisteredException(name, ex);
-                throw ex;
+                throw ex!;
             }
             _hwnd = hwnd;
         }
@@ -49,7 +49,7 @@ namespace GlanceHotkey
                 if (!NativeMethods.UnregisterHotKey(_hwnd, _id))
                 {
                     var hr = Marshal.GetHRForLastWin32Error();
-                    throw Marshal.GetExceptionForHR(hr);
+                    throw Marshal.GetExceptionForHR(hr) ?? new NullReferenceException("未知异常");
                 }
                 _hwnd = IntPtr.Zero;
             }

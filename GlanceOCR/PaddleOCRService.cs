@@ -13,7 +13,7 @@ public class PaddleOCRService : IOCR
     /// <summary>
     /// 识别引擎
     /// </summary>
-    private readonly PaddleOCREngine? _engine;
+    private PaddleOCREngine? _engine;
 
     /// <summary>
     /// 模型配置
@@ -102,6 +102,7 @@ public class PaddleOCRService : IOCR
                 // 处置托管资源
                 _engine!.Dispose();
             }
+            _engine = null;
 
             // 以下注释为清理非托管资源的示例代码
             // // 在此处调用适当的方法来清理非托管资源

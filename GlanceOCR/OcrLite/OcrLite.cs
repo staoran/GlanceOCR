@@ -11,7 +11,6 @@ namespace OcrLiteLib
     {
         public bool isPartImg { get; set; }
         public bool isDebugImg { get; set; }
-        private string dbNetPath, angleNetPath, crnnNetPath, keysPath;
         private DbNet dbNet;
         private AngleNet angleNet;
         private CrnnNet crnnNet;
@@ -34,7 +33,7 @@ namespace OcrLiteLib
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + ex.StackTrace);
-                throw ex;
+                throw;
             }
         }
 

@@ -62,7 +62,8 @@ public class OcrLiteService : IOCR
             bool mostAngle = true;
             return _engine?.Detect(image, padding, imgResize, boxScoreThresh, boxThresh, unClipRatio, doAngle, mostAngle);
         });
-        return result?.StrRes;
+
+        return result?.StrRes ?? string.Empty;
     }
 
     /// <summary>

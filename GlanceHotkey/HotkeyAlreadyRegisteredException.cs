@@ -8,7 +8,7 @@ namespace GlanceHotkey
     {
         private readonly string _name;
 
-        public HotkeyAlreadyRegisteredException(string name, Exception inner) : base(inner.Message, inner)
+        public HotkeyAlreadyRegisteredException(string name, Exception? inner) : base(inner?.Message, inner)
         {
             _name = name;
             HResult = Marshal.GetHRForException(inner);
@@ -18,7 +18,7 @@ namespace GlanceHotkey
             SerializationInfo info,
             StreamingContext context) : base(info, context)
         {
-            _name = (string) info.GetValue("_name", typeof (string));
+            _name = (string) info.GetValue("_name", typeof (string))!;
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

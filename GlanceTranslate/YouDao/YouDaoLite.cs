@@ -33,10 +33,19 @@ public class YouDaoLite : ITranslator, ITransient
             .SetBody(new { q = text, from = from ?? "Auto", to = to }, "application/x-www-form-urlencoded",
                 Encoding.UTF8)
             .WithGZip().PostAsAsync<YouDaoResponseMessage>();
+        if (response == null)
+        {
+            throw Oops.Bah("翻译失败，请求结果为空");
+        }
         if (response.ErrorCode != "0")
         {
             throw Oops.Bah($"翻译失败，错误码：{response.ErrorCode}");
         }
-        return new TranslationResult(response.Translation[0], response.Query, response.L);
+        if (response.Translation == null)
+        {
+            throw Oops.Bah("翻译失败，翻译结果为 null");
+        }
+        
+        return new TranslationResult(response.Translation[0], response.Query ?? "", response.L);
     }
 }

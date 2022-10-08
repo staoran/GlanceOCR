@@ -39,7 +39,7 @@ namespace OcrLiteLib
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + ex.StackTrace);
-                throw ex;
+                throw;
             }
         }
 
@@ -66,7 +66,7 @@ namespace OcrLiteLib
             {
                 Console.WriteLine(ex.Message + ex.StackTrace);
             }
-            return null;
+            return new List<TextBox>();
         }
 
         private static List<TextBox> GetTextBoxes(DisposableNamedOnnxValue[] outputTensor, int rows, int cols, ScaleParam s, float boxScoreThresh, float boxThresh, float unClipRatio)
@@ -105,7 +105,7 @@ namespace OcrLiteLib
                 {
                     continue;
                 }
-                List<Point> newBox = Unclip(box, unClipRatio);
+                List<Point>? newBox = Unclip(box, unClipRatio);
                 if (newBox == null)
                 {
                     continue;
@@ -187,27 +187,12 @@ namespace OcrLiteLib
 
         public static int CompareByX(PointF left, PointF right)
         {
-            if (left == null && right == null)
-            {
-                return 1;
-            }
-
-            if (left == null)
-            {
-                return 0;
-            }
-
-            if (right == null)
-            {
-                return 1;
-            }
-
             if (left.X > right.X)
             {
                 return 1;
             }
 
-            if (left.X == right.X)
+            if (Math.Abs(left.X - right.X) == 0)
             {
                 return 0;
             }
@@ -294,7 +279,7 @@ namespace OcrLiteLib
             return 0;
         }
 
-        private static List<Point> Unclip(List<PointF> box, float unclip_ratio)
+        private static List<Point>? Unclip(List<PointF> box, float unclip_ratio)
         {
             List<IntPoint> theCliperPts = new List<IntPoint>();
             foreach (PointF pt in box)
@@ -328,14 +313,14 @@ namespace OcrLiteLib
         private static float SignedPolygonArea(PointF[] Points)
         {
             // Add the first point to the end.
-            int num_points = Points.Length;
-            PointF[] pts = new PointF[num_points + 1];
+            int numPoints = Points.Length;
+            PointF[] pts = new PointF[numPoints + 1];
             Points.CopyTo(pts, 0);
-            pts[num_points] = Points[0];
+            pts[numPoints] = Points[0];
 
             // Get the areas.
             float area = 0;
-            for (int i = 0; i < num_points; i++)
+            for (int i = 0; i < numPoints; i++)
             {
                 area +=
                     (pts[i + 1].X - pts[i].X) *

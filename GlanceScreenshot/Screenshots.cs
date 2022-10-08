@@ -258,7 +258,7 @@ public partial class Screenshots : Form, IDisposable
     /// <returns></returns>
     private Image? GetScreenshots()
     {
-        if (!_selectRectangle.IsEmpty)
+        if (!_selectRectangle.IsEmpty && BackgroundImage != null)
         {
             Image scr = new Bitmap(_selectRectangle.Width, _selectRectangle.Height);
             using Graphics gs = Graphics.FromImage(scr);

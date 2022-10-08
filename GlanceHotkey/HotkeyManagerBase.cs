@@ -28,8 +28,7 @@
         {
             lock (_hotkeys)
             {
-                Hotkey hotkey;
-                if (_hotkeys.TryGetValue(name, out hotkey))
+                if (_hotkeys.TryGetValue(name, out Hotkey? hotkey))
                 {
                     _hotkeys.Remove(name);
                     _hotkeyNames.Remove(hotkey.Id);
@@ -56,12 +55,11 @@
             ref bool handled,
             out Hotkey hotkey)
         {
-            hotkey = null;
+            hotkey = null!;
             if (IsEnabled && msg == WmHotkey)
             {
                 int id = wParam.ToInt32();
-                string name;
-                if (_hotkeyNames.TryGetValue(id, out name))
+                if (_hotkeyNames.TryGetValue(id, out string? name))
                 {
                     hotkey = _hotkeys[name];
                     var handler = hotkey.Handler;

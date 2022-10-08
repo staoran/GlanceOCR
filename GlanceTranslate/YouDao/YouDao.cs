@@ -52,11 +52,20 @@ public class YouDao : ITranslator, ITransient
         dic.Add("salt", salt);
         dic.Add("sign", sign);
         var response = await "api".SetClient(_options.Name).SetBody(dic).PostAsAsync<YouDaoResponseMessage>();
+        if (response == null)
+        {
+            throw Oops.Bah("翻译失败，请求结果为空");
+        }
         if (response.ErrorCode != "0")
         {
             throw Oops.Bah($"翻译失败，错误码：{response.ErrorCode}");
         }
-        return new TranslationResult(response.Translation[0], response.Query, response.L);
+        if (response.Translation == null)
+        {
+            throw Oops.Bah("翻译失败，翻译结果为 null");
+        }
+        
+        return new TranslationResult(response.Translation[0], response.Query ?? "", response.L);
     }
 
     /// <summary>
@@ -79,9 +88,9 @@ public class YouDao : ITranslator, ITransient
     /// <returns></returns>
     private static string Truncate(string q)
     {
-        if (q == null)
+        if (q.IsNullOrEmpty())
         {
-            return null;
+            return string.Empty;
         }
         int len = q.Length;
         return len <= 20 ? q : (q.Substring(0, 10) + len + q.Substring(len - 10, 10));

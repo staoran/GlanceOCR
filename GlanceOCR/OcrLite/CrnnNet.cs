@@ -41,14 +41,14 @@ namespace OcrLiteLib
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + ex.StackTrace);
-                throw ex;
+                throw;
             }
         }
         private List<string> InitKeys(string path)
         {
             StreamReader sr = new StreamReader(path, Encoding.UTF8);
             List<string> keys = new List<string>();
-            String line;
+            string? line;
             while ((line = sr.ReadLine()) != null)
             {
                 //Console.WriteLine(line.ToString());
