@@ -33,6 +33,7 @@ public class Startup : AppStartup
         // 强类型配置项
         services.AddConfigurableOptions<YouDaoOptions>();
         services.AddConfigurableOptions<YouDaoLiteOptions>();
+        services.AddConfigurableOptions<AppOptions>();
 
         // 远程请求，配置请求客户端
         services.AddRemoteRequest(o =>
