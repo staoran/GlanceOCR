@@ -110,10 +110,10 @@ partial class MainForm
             // 
             this.splitContainer.Panel2.AutoScroll = true;
             this.splitContainer.Panel2.Controls.Add(this.txtTranslate);
-            this.splitContainer.Panel2Collapsed = true;
+            this.splitContainer.Panel2Collapsed = false;
             this.splitContainer.Panel2MinSize = 300;
             this.splitContainer.Size = new System.Drawing.Size(800, 415);
-            this.splitContainer.SplitterDistance = 300;
+            this.splitContainer.SplitterDistance = 395;
             this.splitContainer.SplitterWidth = 1;
             this.splitContainer.TabIndex = 3;
             // 
