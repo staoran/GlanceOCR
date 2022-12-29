@@ -20,6 +20,8 @@ partial class MainForm
 
         // 释放托盘图标
         NotifyIconManager.Current.Dispose();
+        
+        _optionsReloadToken?.Dispose();
 
         base.Dispose(disposing);
     }
@@ -156,7 +158,6 @@ partial class MainForm
             this.txtTranslate.Size = new System.Drawing.Size(96, 100);
             this.txtTranslate.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.txtTranslate.TabIndex = 0;
-            this.txtTranslate.Text = "uiRichTextBox2";
             this.txtTranslate.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.txtTranslate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 

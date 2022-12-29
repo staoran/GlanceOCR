@@ -35,10 +35,20 @@ public class AppOptions : IConfigurableOptions
     /// <summary>
     /// OCR 快捷键
     /// </summary>
-    public string OCRShortcutKey { get; set; }
+    public string OCRShortcutKey { get; set; } = "F4";
+
+    /// <summary>
+    /// OCR 接口
+    /// </summary>
+    public string OCRType { get; set; } = "有道";
 
     /// <summary>
     /// 翻译快捷键
     /// </summary>
-    public string TranslationShortcutKey { get; set; }
+    public string TranslationShortcutKey { get; set; } = "F6";
+
+    /// <summary>
+    /// 翻译接口
+    /// </summary>
+    public string TranslationType { get; set; } = "有道";
 }

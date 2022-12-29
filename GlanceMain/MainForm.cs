@@ -1,3 +1,7 @@
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using Microsoft.Extensions.Options;
+
 namespace GlanceMain;
 
 public partial class MainForm : UIForm
@@ -14,10 +18,23 @@ public partial class MainForm : UIForm
 
     #endregion
 
-    private readonly AppOptions _appOptions;
+    private AppOptions _appOptions;
+
+    private readonly IDisposable? _optionsReloadToken;
+
+    private readonly ToolStripMenuItem _ocrMenu;
+    private readonly ToolStripMenuItem _translateMenu;
+    private readonly SynchronizationContext? _syncContext;
 
     private MainForm()
     {
+        //获取UI线程同步上下文
+        _syncContext = SynchronizationContext.Current;
+        var options = App.GetService<IOptionsMonitor<AppOptions>>();
+        _optionsReloadToken = options.OnChange(ReloadOptions);
+        // _appOptions = App.GetOptionsMonitor<AppOptions>();
+        _appOptions = options.CurrentValue;
+        
         // 初始化托盘图标
         NotifyIconManager.Current.Run("一目十行\n双击截图识别\n单击打开主界面", Resources.AppIcon, n =>
         {
@@ -45,11 +62,118 @@ public partial class MainForm : UIForm
 
         InitializeComponent();
         Icon = Resources.AppIcon;
-        
+
+        _ocrMenu = new ToolStripMenuItem("识别接口")
+        {
+            DropDownItems = 
+            {
+                new ToolStripMenuItem("有道"),
+                new ToolStripMenuItem("百度"),
+                new ToolStripMenuItem("本地1"),
+                new ToolStripMenuItem("本地2")
+            }
+        };
+        _ocrMenu.DropDownItemClicked += OnTypeDropDownItemClicked;
+        txtOCR.ContextMenuStrip = new UIContextMenuStrip()
+        {
+            Items =
+            {
+                { "全选", null, (_, _) => txtOCR.SelectAll() },
+                { "剪切", null, (_, _) => txtOCR.Cut() },
+                { "复制", null, (_, _) => txtOCR.Copy() },
+                { "粘贴", null, (_, _) => txtOCR.Paste() },
+                "-",
+                _ocrMenu
+            }
+        };
         txtOCR.TextChanged += TxtOCROnTextChanged;
+
+        _translateMenu = new ToolStripMenuItem("翻译接口")
+        {
+            DropDownItems =
+            {
+                new ToolStripMenuItem("有道"),
+                new ToolStripMenuItem("百度"),
+                new ToolStripMenuItem("谷歌"),
+                new ToolStripMenuItem("微软")
+            }
+        };
+        _translateMenu.DropDownItemClicked += OnTypeDropDownItemClicked;
+        txtTranslate.ContextMenuStrip = new UIContextMenuStrip()
+        {
+            Items =
+            {
+                { "全选", null, (_, _) => txtTranslate.SelectAll() },
+                { "剪切", null, (_, _) => txtTranslate.Cut() },
+                { "复制", null, (_, _) => txtTranslate.Copy() },
+                { "粘贴", null, (_, _) => txtTranslate.Paste() },
+                "-",
+                _translateMenu
+            }
+        };
         Closing += OnClosing;
         Shown += OnShown;
-        _appOptions = App.GetOptionsMonitor<AppOptions>();
+        
+        ReDropDownItemChecked();
+    }
+
+    /// <summary>
+    /// 配置热重载
+    /// </summary>
+    /// <param name="options"></param>
+    private void ReloadOptions(AppOptions options)
+    {
+        _appOptions = options;
+        // 异步更新已选项
+        _syncContext?.Post(_ => ReDropDownItemChecked(), null);
+    }
+
+    /// <summary>
+    /// 刷新已选项
+    /// </summary>
+    private void ReDropDownItemChecked()
+    {
+        foreach (ToolStripMenuItem dropDownItem in _ocrMenu.DropDownItems)
+        {
+            dropDownItem.Checked = _appOptions.OCRType == dropDownItem.Text;
+        }
+
+        foreach (ToolStripMenuItem dropDownItem in _translateMenu.DropDownItems)
+        {
+            dropDownItem.Checked = _appOptions.TranslationType == dropDownItem.Text;
+        }
+    }
+
+    /// <summary>
+    /// 接口服务选择事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    private async void OnTypeDropDownItemClicked(object? sender, ToolStripItemClickedEventArgs args)
+    {
+        var type = string.Empty;
+        if (sender is ToolStripMenuItem stripMenuItem)
+        {
+            type = stripMenuItem.Text switch
+            {
+                "识别接口" => "OCRType",
+                "翻译接口" => "TranslationType",
+                _ => type
+            };
+        }
+
+        if (args.ClickedItem is ToolStripMenuItem clickedItem && !type.IsNullOrEmpty())
+        {
+            string filePath = Path.Combine(App.HostEnvironment.ContentRootPath, "appsettings.json");
+            string text = await File.ReadAllTextAsync(filePath);
+            JsonNode? jsonNode = JsonNode.Parse(text);
+            if (jsonNode?["App"] is { } app)
+            {
+                app[type] = clickedItem.Text;
+                await File.WriteAllTextAsync(filePath,
+                    jsonNode.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
+            }
+        }
     }
 
     /// <summary>
