@@ -81,7 +81,7 @@ public partial class Screenshots : Form, IDisposable
     {
         if (e.Button == MouseButtons.Right)
         {
-            Application.Exit();
+            DialogResult = DialogResult.Cancel;
         }
 
         base.OnMouseClick(e);
