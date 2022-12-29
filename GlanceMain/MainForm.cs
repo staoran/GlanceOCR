@@ -22,20 +22,48 @@ public partial class MainForm : UIForm
 
     private readonly IDisposable? _optionsReloadToken;
 
+    /// <summary>
+    /// OCR 接口选择菜单
+    /// </summary>
     private readonly ToolStripMenuItem _ocrMenu;
+
+    /// <summary>
+    /// 翻译接口选择菜单
+    /// </summary>
     private readonly ToolStripMenuItem _translateMenu;
+
+    /// <summary>
+    /// UI线程同步上下文
+    /// </summary>
     private readonly SynchronizationContext? _syncContext;
+
+    /// <summary>
+    /// OCR 提供器
+    /// </summary>
+    private readonly INamedServiceProvider<IOCR> _ocrProvider;
+
+    /// <summary>
+    /// 翻译提供器
+    /// </summary>
+    private readonly INamedServiceProvider<ITranslator> _translatorProvider;
 
     private MainForm()
     {
-        //获取UI线程同步上下文
+        #region 初始化
+
+        // 获取UI线程同步上下文
         _syncContext = SynchronizationContext.Current;
+        // 获取 APP 配置项
         var options = App.GetService<IOptionsMonitor<AppOptions>>();
+        // 注册配置源更改事件
         _optionsReloadToken = options.OnChange(ReloadOptions);
         // _appOptions = App.GetOptionsMonitor<AppOptions>();
         _appOptions = options.CurrentValue;
-        
-        // 初始化托盘图标
+
+        #endregion
+
+        #region 初始化托盘图标
+
         NotifyIconManager.Current.Run("一目十行\n双击截图识别\n单击打开主界面", Resources.AppIcon, n =>
         {
             n.ContextMenuStrip = new UIContextMenuStrip()
@@ -60,8 +88,14 @@ public partial class MainForm : UIForm
             n.DoubleClick += btnScreenshots_Click;
         });
 
+        #endregion
+
         InitializeComponent();
         Icon = Resources.AppIcon;
+
+        #region OCR 文本框
+
+        #region 图片识别接口配置菜单
 
         _ocrMenu = new ToolStripMenuItem("识别接口")
         {
@@ -73,7 +107,13 @@ public partial class MainForm : UIForm
                 new ToolStripMenuItem("本地2")
             }
         };
+        // 选择后保存配置
         _ocrMenu.DropDownItemClicked += OnTypeDropDownItemClicked;
+
+        #endregion
+
+        #region OCR 文本框右键菜单
+
         txtOCR.ContextMenuStrip = new UIContextMenuStrip()
         {
             Items =
@@ -86,7 +126,16 @@ public partial class MainForm : UIForm
                 _ocrMenu
             }
         };
+
+        #endregion
+
         txtOCR.TextChanged += TxtOCROnTextChanged;
+
+        #endregion
+
+        #region 翻译文本框
+
+        #region 翻译接口配置菜单
 
         _translateMenu = new ToolStripMenuItem("翻译接口")
         {
@@ -98,7 +147,13 @@ public partial class MainForm : UIForm
                 new ToolStripMenuItem("微软")
             }
         };
+        // 选择后保存配置
         _translateMenu.DropDownItemClicked += OnTypeDropDownItemClicked;
+
+        #endregion
+
+        #region 翻译文本框右键菜单
+
         txtTranslate.ContextMenuStrip = new UIContextMenuStrip()
         {
             Items =
@@ -111,9 +166,15 @@ public partial class MainForm : UIForm
                 _translateMenu
             }
         };
+
+        #endregion
+
+        #endregion
+
         Closing += OnClosing;
         Shown += OnShown;
-        
+
+        // 根据配置文件初始化配置项菜单
         ReDropDownItemChecked();
     }
 
