@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
+using Furion.DependencyInjection;
 using Furion.FriendlyException;
 using Furion.RemoteRequest.Extensions;
 
@@ -9,7 +10,7 @@ namespace GlanceOCR.YouDao;
 /// <summary>
 /// 有道 OCR 轻量版
 /// </summary>
-public class YouDaoOCRLite : IOCR
+public class YouDaoOCRLite : IOCR, ITransient
 {
     /// <summary>
     /// 跟踪是否已调用 Dispose
