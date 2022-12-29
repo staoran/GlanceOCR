@@ -156,9 +156,14 @@ public partial class MainForm : UIForm
     private async void btnTranslate_Click(object? sender, EventArgs e)
     {
         splitContainer.Panel2Collapsed = false;
-        ITranslator trans = App.GetService<YouDaoLite>();
-        var result = await trans.TranslateAsync(txtOCR.Text, "Auto");
-        txtTranslate.Text = result.Translation;
+        var text = txtOCR.Text;
+        if (!text.IsNullOrEmpty())
+        {
+            ITranslator trans = App.GetService<YouDaoLite>();
+            var result = await trans.TranslateAsync(text, "Auto");
+            text = result.Translation;
+        }
+        txtTranslate.Text = text;
     }
 
     #region 内存回收
