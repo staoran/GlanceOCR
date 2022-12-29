@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using Furion.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 namespace GlanceMain;
@@ -59,6 +60,10 @@ public partial class MainForm : UIForm
         _optionsReloadToken = options.OnChange(ReloadOptions);
         // _appOptions = App.GetOptionsMonitor<AppOptions>();
         _appOptions = options.CurrentValue;
+        // 获取 OCR 提供程序
+        _ocrProvider = App.GetService<INamedServiceProvider<IOCR>>();
+        // 获取翻译提供程序
+        _translatorProvider = App.GetService<INamedServiceProvider<ITranslator>>();
 
         #endregion
 
@@ -101,8 +106,8 @@ public partial class MainForm : UIForm
         {
             DropDownItems = 
             {
-                new ToolStripMenuItem("有道"),
-                new ToolStripMenuItem("百度"),
+                CreateMenu("有道轻量", nameof(YouDaoOCRLite)),
+                CreateMenu("百度", ""),
                 new ToolStripMenuItem("本地1"),
                 new ToolStripMenuItem("本地2")
             }
@@ -141,8 +146,8 @@ public partial class MainForm : UIForm
         {
             DropDownItems =
             {
-                new ToolStripMenuItem("有道"),
-                new ToolStripMenuItem("百度"),
+                CreateMenu("有道轻量", nameof(YouDaoLite)),
+                CreateMenu("有道", nameof(YouDao)),
                 new ToolStripMenuItem("谷歌"),
                 new ToolStripMenuItem("微软")
             }
@@ -196,12 +201,12 @@ public partial class MainForm : UIForm
     {
         foreach (ToolStripMenuItem dropDownItem in _ocrMenu.DropDownItems)
         {
-            dropDownItem.Checked = _appOptions.OCRType == dropDownItem.Text;
+            dropDownItem.Checked = _appOptions.OCRType == dropDownItem.Name;
         }
 
         foreach (ToolStripMenuItem dropDownItem in _translateMenu.DropDownItems)
         {
-            dropDownItem.Checked = _appOptions.TranslationType == dropDownItem.Text;
+            dropDownItem.Checked = _appOptions.TranslationType == dropDownItem.Name;
         }
     }
 
@@ -230,11 +235,25 @@ public partial class MainForm : UIForm
             JsonNode? jsonNode = JsonNode.Parse(text);
             if (jsonNode?["App"] is { } app)
             {
-                app[type] = clickedItem.Text;
+                app[type] = clickedItem.Name;
                 await File.WriteAllTextAsync(filePath,
                     jsonNode.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
             }
         }
+    }
+
+    /// <summary>
+    /// 创建菜单
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    private ToolStripMenuItem CreateMenu(string text, string name)
+    {
+        return new ToolStripMenuItem(text)
+        {
+            Name = name
+        };
     }
 
     /// <summary>
@@ -315,7 +334,7 @@ public partial class MainForm : UIForm
                 ShowWaitForm("文字识别中...");
                 try
                 {
-                    using IOCR ocr = new YouDaoOCRLite();
+                    using IOCR ocr = _ocrProvider.GetService<ITransient>(_appOptions.OCRType);
                     await ocr.Check();
                     txtOCR.Text = await ocr.DetectText(image);
                     if (_appOptions.AutoCopy)
@@ -344,7 +363,7 @@ public partial class MainForm : UIForm
         var text = txtOCR.Text;
         if (!text.IsNullOrEmpty())
         {
-            ITranslator trans = App.GetService<YouDaoLite>();
+            ITranslator trans = _translatorProvider.GetService<ITransient>(_appOptions.TranslationType);
             var result = await trans.TranslateAsync(text, "Auto");
             text = result.Translation;
         }
