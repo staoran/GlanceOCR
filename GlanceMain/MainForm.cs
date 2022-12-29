@@ -121,7 +121,7 @@ public partial class MainForm : UIForm
     private async void btnScreenshots_Click(object? sender, EventArgs e)
     {
         Hide();
-        using Screenshots screenshots = new Screenshots();
+        using var screenshots = new Screenshots();
         if (screenshots.ShowDialog() == DialogResult.OK)
         {
             var image = screenshots.SelectImage;
@@ -133,6 +133,10 @@ public partial class MainForm : UIForm
                     using IOCR ocr = new YouDaoOCRLite();
                     await ocr.Check();
                     txtOCR.Text = await ocr.DetectText(image);
+                    if (_appOptions.AutoCopy)
+                    {
+                        Clipboard.SetDataObject(txtOCR.Text);
+                    }
                 }
                 finally
                 {

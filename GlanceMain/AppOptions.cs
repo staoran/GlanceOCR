@@ -28,6 +28,11 @@ public class AppOptions : IConfigurableOptions
     public bool QuickTranslation { get; set; }
 
     /// <summary>
+    /// 自动复制
+    /// </summary>
+    public bool AutoCopy { get; set; }
+
+    /// <summary>
     /// OCR 快捷键
     /// </summary>
     public string OCRShortcutKey { get; set; }
