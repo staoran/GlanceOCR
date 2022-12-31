@@ -40,7 +40,7 @@ public class AppOptions : IConfigurableOptions
     /// <summary>
     /// OCR 接口
     /// </summary>
-    public string OCRType { get; set; } = "有道";
+    public string OCRType { get; set; } = "YouDaoOCRLite";
 
     /// <summary>
     /// 翻译快捷键
@@ -50,5 +50,5 @@ public class AppOptions : IConfigurableOptions
     /// <summary>
     /// 翻译接口
     /// </summary>
-    public string TranslationType { get; set; } = "有道";
+    public string TranslationType { get; set; } = "YouDaoLite";
 }

@@ -69,6 +69,21 @@ public partial class MainForm : UIForm
 
         #region 初始化托盘图标
 
+        var optionsMenu = new ToolStripMenuItem("设置")
+        {
+            DropDownItems = 
+            {
+                CreateMenu("开机自启", nameof(AppOptions.AutoStart), true, _appOptions.AutoStart),
+                CreateMenu("自启到托盘", nameof(AppOptions.Hide), true, _appOptions.Hide),
+                CreateMenu("关闭到托盘", nameof(AppOptions.CloseToPallet), true, _appOptions.CloseToPallet),
+                CreateMenu("快捷翻译", nameof(AppOptions.QuickTranslation), true, _appOptions.QuickTranslation),
+                CreateMenu("识别后复制", nameof(AppOptions.AutoCopy), true, _appOptions.AutoCopy),
+                CreateMenu("设置快捷键", "")
+            }
+        };
+        // 选择后保存配置
+        optionsMenu.DropDownItemClicked += OnTypeDropDownItemClicked;
+
         NotifyIconManager.Current.Run("一目十行\n双击截图识别\n单击打开主界面", Resources.AppIcon, n =>
         {
             n.ContextMenuStrip = new UIContextMenuStrip()
@@ -77,7 +92,7 @@ public partial class MainForm : UIForm
                 {
                     { "截图", null, btnScreenshots_Click },
                     "-",
-                    { "设置", null, (_, _) => { } },
+                    optionsMenu,
                     "-",
                     { "打开", null, (_, _) => { Show(); } },
                     { "退出", null, (_, _) => { Application.ExitThread(); } },
@@ -222,8 +237,9 @@ public partial class MainForm : UIForm
         {
             type = stripMenuItem.Text switch
             {
-                "识别接口" => "OCRType",
-                "翻译接口" => "TranslationType",
+                "识别接口" => nameof(AppOptions.OCRType),
+                "翻译接口" => nameof(AppOptions.TranslationType),
+                "设置" => nameof(AppOptions),
                 _ => type
             };
         }
@@ -235,7 +251,19 @@ public partial class MainForm : UIForm
             JsonNode? jsonNode = JsonNode.Parse(text);
             if (jsonNode?["App"] is { } app)
             {
-                app[type] = clickedItem.Name;
+                if (type == nameof(AppOptions))
+                {
+                    app[clickedItem.Name] = clickedItem.Checked;
+                    if (clickedItem.Name == nameof(AppOptions.AutoStart))
+                    {
+                        // 程序自启
+                        AutoStart.SetMeAutoStart(clickedItem.Checked);
+                    }
+                }
+                else
+                {
+                    app[type] = clickedItem.Name;
+                }
                 await File.WriteAllTextAsync(filePath,
                     jsonNode.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
             }
@@ -247,12 +275,16 @@ public partial class MainForm : UIForm
     /// </summary>
     /// <param name="text"></param>
     /// <param name="name"></param>
+    /// <param name="checkOnClick"></param>
+    /// <param name="check"></param>
     /// <returns></returns>
-    private ToolStripMenuItem CreateMenu(string text, string name)
+    private ToolStripMenuItem CreateMenu(string text, string name, bool checkOnClick = false, bool check = false)
     {
         return new ToolStripMenuItem(text)
         {
-            Name = name
+            Name = name,
+            CheckOnClick = checkOnClick,
+            Checked = check
         };
     }
 
