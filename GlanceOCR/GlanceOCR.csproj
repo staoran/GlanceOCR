@@ -9,11 +9,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Emgu.CV" Version="4.6.0.5131" />
-      <PackageReference Include="Emgu.CV.Bitmap" Version="4.6.0.5131" />
-      <PackageReference Include="Furion.Pure" Version="4.8.3.10" />
-      <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.13.1" />
-      <PackageReference Include="PaddleOCRSharp" Version="2.2.0" />
+      <PackageReference Include="Emgu.CV" Version="4.7.0.5276" />
+      <PackageReference Include="Emgu.CV.Bitmap" Version="4.7.0.5276" />
+      <PackageReference Include="Furion.Pure" Version="4.8.8.1" />
+      <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.14.1" />
+      <PackageReference Include="PaddleOCRSharp" Version="3.0.0" />
       <PackageReference Include="ParagonClipper" Version="6.4.2" />
     </ItemGroup>
 

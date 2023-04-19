@@ -15,7 +15,7 @@ static class Program
         RunningInstance.Handle();
 
         // 启动服务主机
-        Serve.Run(GenericRunOptions.DefaultSilence);
+        Serve.RunNative(includeWeb: false);
 
         // 处理高分问题
         Application.SetHighDpiMode(HighDpiMode.PerMonitor);

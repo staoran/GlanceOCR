@@ -35,17 +35,20 @@ public class PaddleOCRService : IOCR
             rec_infer = Path.Combine(basePath, "inference", "ch_PP-OCRv3_rec_infer"),
             keys = Path.Combine(basePath, "inference", "ppocr_keys.txt")
         };
-
+        
+        //OCR参数
         _parameter = new OCRParameter()
         {
-            numThread = 6, //预测并发线程数
-            Enable_mkldnn = 1, //web部署该值建议设置为0,否则出错，内存如果使用很大，建议该值也设置为0.
-            use_angle_cls = 1, //是否开启方向检测，用于检测识别180旋转
-            det_db_score_mode = 1, //是否使用多段线，即文字区域是用多段线还是用矩形，
+            cpu_math_library_num_threads = 6, //预测并发线程数
+            enable_mkldnn = false, //web部署该值建议设置为0,否则出错，内存如果使用很大，建议该值也设置为0.
+            use_angle_cls = true, //是否开启方向检测，用于检测识别180旋转
+            det_db_score_mode = true, //是否使用多段线，即文字区域是用多段线还是用矩形，
             // rec_img_h = 32,
-            UnClipRatio = 1.6f
+            det_db_unclip_ratio = 1.6f,
+            max_side_len = 2000
         };
 
+        //初始化OCR引擎
         _engine = new PaddleOCREngine(_modelConfig, _parameter);
     }
 
