@@ -123,8 +123,6 @@ public partial class MainForm : UIForm
             DropDownItems = 
             {
                 CreateMenu("有道轻量", nameof(YouDaoOCRLite)),
-                CreateMenu("OcrLite", nameof(OcrLiteService)),
-                CreateMenu("PaddleOCR", nameof(PaddleOCRService)),
             }
         };
         // 选择后保存配置

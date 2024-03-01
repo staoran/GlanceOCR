@@ -6,7 +6,7 @@
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
         <Configurations>Release;Debug</Configurations>
-        <Platforms>x64</Platforms>
+        <Platforms>AnyCPU</Platforms>
         <LangVersion>default</LangVersion>
     </PropertyGroup>
 

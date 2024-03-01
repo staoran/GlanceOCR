@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Configurations>Release;Debug</Configurations>
-        <Platforms>x64</Platforms>
+        <Platforms>AnyCPU</Platforms>
         <LangVersion>default</LangVersion>
     </PropertyGroup>
 
