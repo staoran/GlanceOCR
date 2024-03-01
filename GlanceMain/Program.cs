@@ -8,6 +8,7 @@ static class Program
     [STAThread]
     static void Main()
     {
+        UIMessageTip.ShowOk("一目十行启动中...", 1000);
         // 处理全局异常
         GlobalException.Handle();
 
@@ -22,6 +23,7 @@ static class Program
         // 应用程序初始化
         ApplicationConfiguration.Initialize();
 
+        UIMessageTip.ShowOk("一目十行启动完成...", 1000);
         Application.Run(MainForm.Current);
     }
 }

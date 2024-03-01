@@ -3,12 +3,12 @@
 /// <summary>
 /// 截屏程序
 /// </summary>
-public partial class Screenshots : Form, IDisposable
+public partial class Screenshots : Form
 {
     /// <summary>
     /// 屏幕图像缓存
     /// </summary>
-    private readonly Dictionary<Rectangle, Image> _screenImages;
+    private readonly Dictionary<Rectangle, Bitmap> _screenImages;
 
     /// <summary>
     /// 是否按下
@@ -28,12 +28,12 @@ public partial class Screenshots : Form, IDisposable
     /// <summary>
     /// 选择的图片
     /// </summary>
-    public Image? SelectImage => GetScreenshots();
+    public Bitmap? SelectImage => GetScreenshots();
 
     public Screenshots()
     {
         // 初始化缓存
-        _screenImages = new Dictionary<Rectangle, Image>();
+        _screenImages = new Dictionary<Rectangle, Bitmap>();
 
         InitializeComponent();
 
@@ -202,7 +202,7 @@ public partial class Screenshots : Form, IDisposable
         Visible = false;
 
         Rectangle bounds = default;
-        Image? backgroundImage = null;
+        Bitmap? backgroundImage = null;
 
         // 先从缓存中找屏幕数据
         if (_screenImages.Count != 0)
@@ -256,11 +256,11 @@ public partial class Screenshots : Form, IDisposable
     /// 获取最终截图
     /// </summary>
     /// <returns></returns>
-    private Image? GetScreenshots()
+    private Bitmap? GetScreenshots()
     {
         if (!_selectRectangle.IsEmpty && BackgroundImage != null)
         {
-            Image scr = new Bitmap(_selectRectangle.Width, _selectRectangle.Height);
+            var scr = new Bitmap(_selectRectangle.Width, _selectRectangle.Height);
             using Graphics gs = Graphics.FromImage(scr);
             gs.DrawImage(BackgroundImage, 0, 0, _selectRectangle, GraphicsUnit.Pixel);
             return scr;

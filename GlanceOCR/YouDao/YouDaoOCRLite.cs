@@ -24,7 +24,7 @@ public class YouDaoOCRLite : IOCR, ITransient
     }
 
     /// <inheritdoc/>
-    public async Task<string> DetectText(Image image)
+    public async Task<string> DetectText(Bitmap image)
     {
         using var m = new MemoryStream();
         image.Save(m, ImageFormat.Jpeg);

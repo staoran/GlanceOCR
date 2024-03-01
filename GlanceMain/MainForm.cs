@@ -123,9 +123,8 @@ public partial class MainForm : UIForm
             DropDownItems = 
             {
                 CreateMenu("有道轻量", nameof(YouDaoOCRLite)),
-                CreateMenu("百度", ""),
-                new ToolStripMenuItem("本地1"),
-                new ToolStripMenuItem("本地2")
+                CreateMenu("OcrLite", nameof(OcrLiteService)),
+                CreateMenu("PaddleOCR", nameof(PaddleOCRService)),
             }
         };
         // 选择后保存配置
@@ -364,7 +363,8 @@ public partial class MainForm : UIForm
             var image = screenshots.SelectImage;
             if (image != null)
             {
-                ShowWaitForm("文字识别中...");
+                // this.ShowWaitForm("文字识别中...");
+                this.ShowProcessForm();
                 try
                 {
                     using IOCR ocr = _ocrProvider.GetService<ITransient>(_appOptions.OCRType);
@@ -377,7 +377,8 @@ public partial class MainForm : UIForm
                 }
                 finally
                 {
-                    HideWaitForm();
+                    // this.HideWaitForm();
+                    this.HideProcessForm();
                     Show();
                 }
             }
