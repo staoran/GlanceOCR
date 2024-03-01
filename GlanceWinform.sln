@@ -10,6 +10,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlanceTranslate", "GlanceTr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlanceHotkey", "GlanceHotkey\GlanceHotkey.csproj", "{AE4FA686-B566-4A3F-9A92-C7925827383F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlanceOcrLite", "GlanceOcrLite\GlanceOcrLite.csproj", "{357B37BB-6DD2-437E-BB76-1B26CE7A4550}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlancePaddleOCR", "GlancePaddleOCR\GlancePaddleOCR.csproj", "{3A979A60-BEFF-417F-ACF6-32D8C6E8BF50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugins", "plugins", "{4B000963-FE80-4A6A-9F8B-88C48A70F895}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlanceBase", "GlanceBase\GlanceBase.csproj", "{F5FAC25D-13E0-47C8-A1D6-4EAEA4C9639C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|x64 = Release|x64
@@ -37,5 +45,21 @@ Global
 		{AE4FA686-B566-4A3F-9A92-C7925827383F}.Debug|x64.Build.0 = Debug|x64
 		{AE4FA686-B566-4A3F-9A92-C7925827383F}.Release|x64.ActiveCfg = Release|x64
 		{AE4FA686-B566-4A3F-9A92-C7925827383F}.Release|x64.Build.0 = Release|x64
+		{357B37BB-6DD2-437E-BB76-1B26CE7A4550}.Release|x64.ActiveCfg = Release|Any CPU
+		{357B37BB-6DD2-437E-BB76-1B26CE7A4550}.Release|x64.Build.0 = Release|Any CPU
+		{357B37BB-6DD2-437E-BB76-1B26CE7A4550}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{357B37BB-6DD2-437E-BB76-1B26CE7A4550}.Debug|x64.Build.0 = Debug|Any CPU
+		{3A979A60-BEFF-417F-ACF6-32D8C6E8BF50}.Release|x64.ActiveCfg = Release|Any CPU
+		{3A979A60-BEFF-417F-ACF6-32D8C6E8BF50}.Release|x64.Build.0 = Release|Any CPU
+		{3A979A60-BEFF-417F-ACF6-32D8C6E8BF50}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3A979A60-BEFF-417F-ACF6-32D8C6E8BF50}.Debug|x64.Build.0 = Debug|Any CPU
+		{F5FAC25D-13E0-47C8-A1D6-4EAEA4C9639C}.Release|x64.ActiveCfg = Release|Any CPU
+		{F5FAC25D-13E0-47C8-A1D6-4EAEA4C9639C}.Release|x64.Build.0 = Release|Any CPU
+		{F5FAC25D-13E0-47C8-A1D6-4EAEA4C9639C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F5FAC25D-13E0-47C8-A1D6-4EAEA4C9639C}.Debug|x64.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{357B37BB-6DD2-437E-BB76-1B26CE7A4550} = {4B000963-FE80-4A6A-9F8B-88C48A70F895}
+		{3A979A60-BEFF-417F-ACF6-32D8C6E8BF50} = {4B000963-FE80-4A6A-9F8B-88C48A70F895}
 	EndGlobalSection
 EndGlobal

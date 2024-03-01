@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Emgu.CV" Version="4.8.1.5350" />
+      <PackageReference Include="Emgu.CV.Bitmap" Version="4.8.1.5350" />
+      <PackageReference Include="Furion.Pure" Version="4.9.1.35" />
+      <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.17.1" />
+      <PackageReference Include="ParagonClipper" Version="6.4.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="models\angle_net.onnx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="models\crnn_lite_lstm.onnx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="models\dbnet.onnx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="models\keys.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="cvextern.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GlanceBase\GlanceBase.csproj" />
+    </ItemGroup>
+
+</Project>

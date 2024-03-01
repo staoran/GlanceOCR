@@ -4,6 +4,7 @@ using Furion.DependencyInjection;
 using Furion.FriendlyException;
 using Furion.LinqBuilder;
 using Furion.RemoteRequest.Extensions;
+using GlanceBase;
 using Microsoft.Extensions.Options;
 
 namespace GlanceTranslate.YouDao;

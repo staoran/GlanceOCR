@@ -1,41 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Configurations>Release;Debug</Configurations>
         <Platforms>x64</Platforms>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Emgu.CV" Version="4.7.0.5276" />
-      <PackageReference Include="Emgu.CV.Bitmap" Version="4.7.0.5276" />
-      <PackageReference Include="Furion.Pure" Version="4.8.8.1" />
-      <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.14.1" />
-      <PackageReference Include="PaddleOCRSharp" Version="3.0.0" />
-      <PackageReference Include="ParagonClipper" Version="6.4.2" />
+      <PackageReference Include="Furion.Pure" Version="4.9.1.35" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="cvextern.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="models\angle_net.onnx">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="models\crnn_lite_lstm.onnx">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="models\dbnet.onnx">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="models\keys.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="opencv_videoio_ffmpeg440_64.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      <Folder Include="OcrLite\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GlanceBase\GlanceBase.csproj" />
     </ItemGroup>
 
 </Project>

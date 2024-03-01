@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net7.0-windows</TargetFramework>
+        <TargetFramework>net8.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -14,12 +14,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="SunnyUI" Version="3.3.5" />
+      <PackageReference Include="SunnyUI" Version="3.6.5" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\GlanceHotkey\GlanceHotkey.csproj" />
+      <ProjectReference Include="..\GlanceOcrLite\GlanceOcrLite.csproj" />
       <ProjectReference Include="..\GlanceOCR\GlanceOCR.csproj" />
+      <ProjectReference Include="..\GlancePaddleOCR\GlancePaddleOCR.csproj" />
       <ProjectReference Include="..\GlanceScreenshot\GlanceScreenshot.csproj" />
       <ProjectReference Include="..\GlanceTranslate\GlanceTranslate.csproj" />
     </ItemGroup>
